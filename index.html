@@ -1,572 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>About Me</title>
-		<style>
-			body {
-				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-				line-height: 1.6;
-				color: #1a1a1a;
-				background: #0a0a0a;
-				min-height: 100vh;
-				overflow-x: hidden;
-			}
-
-			.name {
-				font-size: 3em;
-				font-weight: 800;
-				margin-bottom: 15px;
-				text-align: center;
-				z-index: 1;
-				background: #00d4ff;
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				background-clip: text;
-				letter-spacing: -0.02em;
-			}
-
-			.about-me {
-				max-width: 1200px;
-				margin: 0 auto;
-				padding: 20px;
-				position: relative;
-				z-index: 2;
-			}
-
-			.section-title {
-				font-size: 2.2em;
-				font-weight: 700;
-				color: #ffffff;
-				margin-bottom: 30px;
-				position: relative;
-				padding-left: 30px;
-				letter-spacing: -0.01em;
-			}
-
-			.section-title::before {
-				content: '';
-				position: absolute;
-				left: 0;
-				top: 50%;
-				transform: translateY(-50%);
-				width: 4px;
-				height: 40px;
-				background: #ff006e;
-				border-radius: 2px;
-			}
-
-			.summary {
-				font-size: 1.2em;
-				line-height: 1.8;
-				color: #b0b0b0;
-				text-align: left;
-				background: rgba(20, 20, 20, 0.6);
-				border: 1px solid rgba(255, 255, 255, 0.05);
-				padding: 40px;
-				border-radius: 20px;
-				margin-bottom: 40px;
-				backdrop-filter: blur(10px);
-				position: relative;
-			}
-
-			.section-bar {
-				padding: 3px;
-				margin-bottom: 3px;
-				position: relative;
-			}
-
-			.section-bar::before {
-				content: '';
-				position: absolute;
-				top: -300%;
-				left: 0;
-				right: 0;
-				height: 3px;
-				background: linear-gradient(90deg, transparent, #00d4ff, transparent);
-			}
-
-			.experience-item,.contribution-item, .education-item {
-				margin-bottom: 40px;
-				padding: 40px;
-				background: rgba(50, 50, 50, 0.6);
-				border: 1px solid rgba(255, 255, 255, 0.05);
-				border-left: 3px solid #ffffff;
-				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-				cursor: pointer;
-				backdrop-filter: blur(10px);
-				position: relative;
-			}
-
-			.experience-item:hover,.contribution-item:hover, .education-item:hover {
-				transform: translateX(3px);
-				border-left-color: #00d4ff;
-				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-				background: rgba(25, 25, 25, 0.8);
-			}
-
-			.job-title, .degree-title, .contribution-title {
-				font-size: 1.5em;
-				font-weight: 600;
-				color: #00d4ff;
-				margin-bottom: 8px;
-			}
-
-			.contribution-title:hover {
-				transform: translateX(3px);
-				color: #ff006e;
-				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-				background: rgba(25, 25, 25, 0.8);
-			}
-
-			.company, .school {
-				font-size: 1.2em;
-				color: #ffffff;
-				margin-bottom: 8px;
-				font-weight: 500;
-			}
-
-			.date {
-				color: #888;
-				font-size: 0.95em;
-				margin-bottom: 20px;
-				font-weight: 400;
-			}
-
-			.description {
-				color: #ffffff;
-				line-height: 1.5;
-				font-size: 1.05em;
-			}
-
-			.description-level2 {
-				color: #ffffff;
-				margin-left: 2em;
-			}
-
-			.hashtag {
-				color: #b0b0b0;
-				line-height: 1.7;
-				font-size: 1.05em;
-			}
-
-			.contribution-level2 {
-				color: #ffffff;
-				margin-left: 2em;
-				font-size: 1em;
-			}
-
-			.skills-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-				gap: 30px;
-			}
-
-			.skill-category {
-				background: rgba(20, 20, 20, 0.6);
-				border: 1px solid rgba(255, 255, 255, 0.05);
-				padding: 30px;
-				border-radius: 20px;
-				text-align: center;
-				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-				backdrop-filter: blur(10px);
-			}
-
-			.skill-category:hover {
-				background: rgba(25, 25, 25, 0.8);
-				transform: translateY(-5px);
-				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-			}
-
-			.skill-title {
-				font-weight: 600;
-				color: #ffffff;
-				margin-bottom: 20px;
-				font-size: 1.3em;
-			}
-
-			.skill-tags {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 12px;
-				justify-content: center;
-			}
-
-			.skill-tag {
-				background: linear-gradient(45deg, #00d4ff, #0099cc);
-				color: white;
-				padding: 8px 16px;
-				border-radius: 25px;
-				font-size: 0.9em;
-				font-weight: 500;
-				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-				border: 1px solid rgba(255, 255, 255, 0.1);
-			}
-
-			.skill-tag:hover {
-				transform: scale(1.05);
-				background: linear-gradient(45deg, #ff006e, #cc0055);
-				box-shadow: 0 5px 15px rgba(255, 0, 110, 0.3);
-			}
-
-			.github-btn {
-				position: fixed;
-				bottom: 210px;
-				right: 30px;
-				background: linear-gradient(45deg, #ff006e, #8338ec);
-				color: white;
-				border: none;
-				height:60px;
-				width:190px;
-				padding: 18px 28px;
-				border-radius: 50px;
-				font-size: 1.1em;
-				font-weight: 600;
-				cursor: pointer;
-				box-shadow: 0 8px 30px rgba(255, 0, 110, 0.3);
-				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-				z-index: 1000;
-				border: 1px solid rgba(255, 255, 255, 0.1);
-				backdrop-filter: blur(10px);
-			}
-
-			.github-btn:hover {
-				transform: translateY(-3px);
-				box-shadow: 0 12px 40px rgba(255, 0, 110, 0.4);
-				background: linear-gradient(45deg, #ff0080, #9d50ff);
-			}
-
-			.email-btn {
-				position: fixed;
-				bottom: 120px;
-				right: 30px;
-				background: linear-gradient(45deg, #ff006e, #8338ec);
-				color: white;
-				border: none;
-				height:60px;
-				width:190px;
-				padding: 18px 28px;
-				border-radius: 50px;
-				font-size: 1.1em;
-				font-weight: 600;
-				cursor: pointer;
-				box-shadow: 0 8px 30px rgba(255, 0, 110, 0.3);
-				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-				z-index: 1000;
-				border: 1px solid rgba(255, 255, 255, 0.1);
-				backdrop-filter: blur(10px);
-			}
-
-			.email-btn:hover {
-				transform: translateY(-3px);
-				box-shadow: 0 12px 40px rgba(255, 0, 110, 0.4);
-				background: linear-gradient(45deg, #ff0080, #9d50ff);
-			}
-
-			.linkedin-btn {
-				position: fixed;
-				bottom: 300px;
-				right: 30px;
-				background: linear-gradient(45deg, #ff006e, #8338ec);
-				color: white;
-				border: none;
-				height:60px;
-				width:190px;
-				padding: 18px 28px;
-				border-radius: 50px;
-				font-size: 1.1em;
-				font-weight: 600;
-				cursor: pointer;
-				box-shadow: 0 8px 30px rgba(255, 0, 110, 0.3);
-				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-				z-index: 1000;
-				border: 1px solid rgba(255, 255, 255, 0.1);
-				backdrop-filter: blur(10px);
-			}
-
-			.linkedin-btn:hover {
-				transform: translateY(-3px);
-				box-shadow: 0 12px 40px rgba(255, 0, 110, 0.4);
-				background: linear-gradient(45deg, #ff0080, #9d50ff);
-			}
-
-			.download-btn {
-				position: fixed;
-				bottom: 30px;
-				right: 30px;
-				background: linear-gradient(45deg, #ff006e, #8338ec);
-				color: white;
-				border: none;
-				height:60px;
-				width:190px;
-				padding: 18px 28px;
-				border-radius: 50px;
-				font-size: 1.1em;
-				font-weight: 600;
-				cursor: pointer;
-				box-shadow: 0 8px 30px rgba(255, 0, 110, 0.3);
-				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-				z-index: 1000;
-				border: 1px solid rgba(255, 255, 255, 0.1);
-				backdrop-filter: blur(10px);
-			}
-
-			.download-btn:hover {
-				transform: translateY(-3px);
-				box-shadow: 0 12px 40px rgba(255, 0, 110, 0.4);
-				background: linear-gradient(45deg, #ff0080, #9d50ff);
-			}
-		</style>
-	</head>
-
-	<body>
-		<div class="about-me">
-			<div class="name">
-				<p>Hong-Ren Chen</p>
-			</div>
-
-			<div class="content">
-				<div class="section">
-					<h2 class="section-title">PROFESSIONAL SUMMARY</h2>
-
-						<div class="section-bar"></div>
-
-						<div class="summary">
-							I am a firmware engineer with over six years of experience in SoC firmware development. I currently work at ITE, where I am responsible for Zephyr Kernel drivers and application development. Prior to joining ITE, I worked as a firmware engineer on management controller firmware (OpenBMC and OpenBIC) for server products. I also have hands-on experience with various protocols, including I2C, I3C, eSPI, and ADC, among others.
-						</div>
-
-					<h2 class="section-title">WORK EXPERIENCES</h2>
-
-						<div class="section-bar"></div>
-
-						<div class="experience-item">
-							<div class="job-title">Senior Firmware Engineer</div>
-							<div class="company">ITE Tech. Inc., New Taipei city </div>
-							<div class="date">June. 2023 - present</div>
-							<div class="description">
-								• Developed Zephyr OS drivers for embedded controller(EC) chip<br>
-									<div class="description-level2">
-										o Debug port implementation: JTAG with OpenOCD and GDB<br>
-										o Driver porting including I3C, SPI and USB<br>
-									</div><p></p>
-								• Cooperated Chromium EC project with Google<br>
-									<div class="description-level2">
-										o USB HID touchpad, keyboard and vendor class subsystem<br>
-									</div><p></p>
-								• Wrote SDK programming guide<br>
-							</div>
-							<div class="hashtag"><em>#Chromium-EC #ZephyrOS #Risc-V</em></div>
-						</div>
-
-						<div class="experience-item">
-							<div class="job-title">Technical Supervisor / Firmware Engineer</div>
-							<div class="company">Wiwynn Corporation, New Taipei city</div>
-							<div class="date">Sep. 2019 - May.2023</div>
-							<div class="description">
-								• Bring-upped new server projects<br>
-									<div class="description-level2">
-										o Intel BHS platform with Aspeed AST1030 BIC<br>
-										o Intel EGS platform with Aspeed AST2600 BMC<br>
-										o AMD Rome and Milian platforms with Aspeed AST2500 BMC<br>
-									</div><p></p>
-
-								• Developed and maintained OpenBMC/OpenBIC firmwares<br>
-									<div class="description-level2">
-										o System and CPU level power capping services<br>
-										o IPMI commands following customer requirement<br>
-										o OpenBIC(Bridge IC) firmware codebase setup, including optimization and modularization<br>
-									</div><p></p>
-
-								• Ported Linux Kernel drivers, including I3C, PECI, IO expender, fan controller, CLD(customization)…etc<br><p></p>
-								• Co-worked with hardware engineer to verify the hardware paths including I2C, eSPI, JTAG, GPIOs…etc<br><p></p>
-							</div>
-							<div class="hashtag"><em>#OpenBMC #OpenBIC #Linux #ZephyrOS</em></div>
-						</div>
-
-					<h2 class="section-title">MY OPEN-SOURCE CONTRIBUTIONS</h2>
-
-						<div class="section-bar"></div>
-
-						<div class="contribution-item">
-							<div class="contribution-title" onclick="window.open('https://github.com/zephyrproject-rtos/zephyr/pulls?q=author%3AChenhongren', '_blank')">
-								Linux foundation ZephyrOS<br>
-							</div>
-							<div class="contribution-level2">
-								> Link: https://github.com/zephyrproject-rtos/zephyr/pulls?q=author%3AChenhongren<br>
-							</div><p></p>
-
-							<div class="contribution-title" onclick="window.open('https://chromium-review.googlesource.com/q/(author:Ren.Chen@ite.com.tw+OR+author:Ren.Chen@ite.com.tw-copybot-pick)+status:merged+branch:main', '_blank')">
-								Google Chormium EC project<br>
-							</div>
-							<div class="contribution-level2">
-								> Link: https://chromium-review.googlesource.com/q/(author:Ren.Chen@ite.com.tw+OR+author:Ren.Chen@ite.com.tw-copybot-pick)+status:merged+branch:main<br>
-							</div><p></p>
-
-							<div class="contribution-title" onclick="window.open('https://github.com/search?q=repo%3Afacebook%2FOpenBIC+author%3ARenChen-wiwynn&type=commits', '_blank')">
-								Meta OpenBIC firmware development<br>
-							</div>
-							<div class="contribution-level2">
-								> Link: https://github.com/search?q=repo%3Afacebook%2FOpenBIC+author%3ARenChen-wiwynn&type=commits<br>
-							</div><p></p>
-						</div>
-
-					<h2 class="section-title">EDUCATION</h2>
-
-						<div class="section-bar"></div>
-
-						<div class="education-item">
-							<div class="degree-title">Master’s Degree in Electronic and Computer Engineering</div>
-							<div class="school">National Taiwan University of Science and Technology </div>
-							<div class="date">Sep. 2017 - Jun. 2019</div>
-							<div class="description">
-								• Dissertation title: "Contactless Pulse Rate Measurement based on a SoC Platform"<br><p></p>
-								• IEEE Journal paper<br>
-									<div class="description-level2">
-										o Title: A Real-Time and Non-contact Pulse Rate Measurement System on Fitness Equipment<br>
-									</div>
-									<div class="description-level2">
-										o Published in IEEE Transactions on Instrumentation and MeasurementDate of Publication: December 2021<br>
-									</div>
-									<div class="description-level2" onclick="window.open('https://ieeexplore.ieee.org/document/9654212', '_blank')">
-										o Link: https://ieeexplore.ieee.org/document/9654212<br>
-									</div>
-							</div>
-						</div>
-						<div class="education-item">
-							<div class="degree-title">Bachelor's Degree in Electronic and Computer Engineering</div>
-							<div class="school">National Taiwan University of Science and Technology </div>
-							<div class="date">Sep. 2013 - Jun. 2017</div>
-						</div>
-
-
-
-					<h2 class="section-title">SKILLS</h2>
-
-						<div class="section-bar"></div>
-
-						<div class="skills-grid">
-						<div class="skill-category">
-							<div class="skill-title">Communication Protocals</div>
-							<div class="skill-tags">
-								<span class="skill-tag">USB</span>
-								<span class="skill-tag">HID</span>
-								<span class="skill-tag">I3C(SDR)</span>
-								<span class="skill-tag">eSPI</span>
-								<span class="skill-tag">SPI</span>
-								<span class="skill-tag">I2C</span>
-								<span class="skill-tag">UART</span>
-							</div>
-						</div>
-
-						<div class="skill-category">
-							<div class="skill-title">Yocto Projects</div>
-							<div class="skill-tags">
-								<span class="skill-tag">bitbake</span>
-								<span class="skill-tag">poky</span>
-							</div>
-						</div>
-
-						<div class="skill-category">
-							<div class="skill-title">Debug tools</div>
-							<div class="skill-tags">
-								<span class="skill-tag">OpenOCD</span>
-								<span class="skill-tag">Telnet</span>
-								<span class="skill-tag">GDB</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<button class="github-btn" onclick="window.open('https://github.com/Chenhongren', '_blank')">
-			<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right: 5px;">
-					<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-			</svg> GitHub
-		</button>
-
-		<button class="linkedin-btn" onclick="window.open('https://linkedin.com/in/ren-chen-898012277/', '_blank')">
-			🌐 Linkedin
-		</button>
-
-		<button class="email-btn" onclick=copyToClipboard('chen.ren.tw@gmail.com')>
-			📧 EMail
-		</button>
-
-		<button class="download-btn" onclick="download()">
-			📄 Download
-		</button>
-
-		<script>
-			function copyToClipboard(text) {
-				navigator.clipboard.writeText(text).then(() => {
-					// Show a temporary notification
-					const notification = document.createElement('div');
-					notification.textContent = 'Copied to clipboard!';
-					notification.style.cssText = `
-						position: fixed;
-						top: 20px;
-						right: 20px;
-						background: linear-gradient(45deg, #00d4ff, #0099cc);
-						color: white;
-						padding: 15px 25px;
-						border-radius: 50px;
-						z-index: 1000;
-						font-weight: 600;
-						animation: slideInRight 0.3s ease-out;
-						box-shadow: 0 8px 30px rgba(0, 212, 255, 0.3);
-						backdrop-filter: blur(10px);
-						border: 1px solid rgba(255, 255, 255, 0.1);
-					`;
-					document.body.appendChild(notification);
-
-					setTimeout(() => {
-						notification.remove();
-					}, 3000);
-				});
-			}
-
-
-		function download() {
-			// Replace this URL with your actual PDF resume URL
-			const pdfUrl = 'https://drive.google.com/file/d/175VhCU-ewwSQiLeKnhUMh8Brf-I0jm0I/view?usp=drive_link';
-
-			// Create a temporary anchor element
-			const link = document.createElement('a');
-			link.href = pdfUrl;
-			link.download = 'Your-Name-Resume.pdf'; // Set the desired filename
-			link.target = '_blank'; // Open in new tab if direct download fails
-
-			// Trigger the download
-			document.body.appendChild(link);
-			link.click();
-			document.body.removeChild(link);
-
-			// Show notification
-			const notification = document.createElement('div');
-			notification.textContent = 'Starting download...';
-			notification.style.cssText = `
-				position: fixed;
-				top: 20px;
-				right: 20px;
-				background: linear-gradient(45deg, #00d4ff, #0099cc);
-				color: white;
-				padding: 15px 25px;
-				border-radius: 50px;
-				z-index: 1000;
-				font-weight: 600;
-				animation: slideInRight 0.3s ease-out;
-				box-shadow: 0 8px 30px rgba(0, 212, 255, 0.3);
-				backdrop-filter: blur(10px);
-				border: 1px solid rgba(255, 255, 255, 0.1);
-			`;
-			document.body.appendChild(notification);
-
-			setTimeout(() => {
-				notification.remove();
-			}, 3000);
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Hong-Ren Chen</title>
+
+	<style>
+		body {
+			margin: 0;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: #0a0a0a;
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont,
+				'Segoe UI', Roboto, sans-serif;
+			color: white;
 		}
 
-		</script>
-	</body>
+		.container {
+			text-align: center;
+			padding: 20px;
+		}
+
+		.name {
+			font-size: 3.5em;
+			font-weight: 800;
+			margin-bottom: 12px;
+			background: linear-gradient(90deg, #00d4ff, #9d50ff);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			letter-spacing: -0.02em;
+		}
+
+		.subtitle {
+			color: #9aa;
+			font-size: 1.2em;
+			letter-spacing: 0.06em;
+			text-align: center;
+			margin-bottom: 18px;
+			line-height: 1.6;
+		}
+
+		.hashtags {
+			font-size: 0.95em;
+			color: #9aa;
+			margin-bottom: 40px;
+			letter-spacing: 0.03em;
+		}
+
+		.hashtags span {
+			margin: 0 6px;
+			white-space: nowrap;
+		}
+
+		.nav-buttons,
+		.social-buttons {
+			display: flex;
+			justify-content: center;
+			gap: 20px;
+			margin-bottom: 30px;
+			flex-wrap: wrap;
+		}
+
+		.nav-btn {
+			padding: 12px 26px;
+			border-radius: 30px;
+			border: 1px solid rgba(255,255,255,0.15);
+			background: rgba(20,20,20,0.7);
+			color: white;
+			font-size: 1em;
+			font-weight: 600;
+			cursor: pointer;
+			transition: 0.3s ease;
+			backdrop-filter: blur(10px);
+		}
+
+		.nav-btn:hover {
+			transform: translateY(-3px);
+			border-color: #00d4ff;
+			box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+		}
+
+		.icon-btn {
+			width: 52px;
+			height: 52px;
+			border-radius: 50%;
+			border: 1px solid rgba(255,255,255,0.15);
+			background: rgba(20,20,20,0.7);
+			color: white;
+			font-size: 1.3em;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: 0.3s ease;
+			backdrop-filter: blur(10px);
+		}
+
+		.icon-btn:hover {
+			transform: translateY(-4px) scale(1.05);
+			border-color: #ff006e;
+			box-shadow: 0 10px 30px rgba(255, 0, 110, 0.4);
+		}
+	</style>
 </head>
+
+<body>
+	<div class="container">
+		<div class="name">Hong-Ren Chen</div>
+		<div class="subtitle">
+			Firmware Engineer · Embedded Systems · Open Source Project
+		</div>
+		<div class="hashtags">
+			<span>#Member of Zephyr Project</span>
+			<span>#Linux</span>
+			<span>#OpenBMC</span>
+			<span>#OpenBIC</span>
+			<span>#Chromebook EC</span>
+		</div>
+
+		<!-- Page navigation -->
+		<div class="nav-buttons">
+			<button class="nav-btn" onclick="go('aboutme.html')">About Me</button>
+			<button class="nav-btn" onclick="go('projects.html')">Projects</button>
+			<button class="nav-btn" onclick="go('skills.html')">Skills</button>
+		</div>
+
+		<!-- Social icons -->
+		<div class="social-buttons">
+
+			<button class="icon-btn" title="Email"
+				onclick="copyEmail('chen.ren.tw@gmail.com')">📧</button>
+
+			<button class="icon-btn" title="GitHub"
+				onclick="openLink('https://github.com/Chenhongren')">🐙</button>
+
+			<button class="icon-btn" title="LinkedIn"
+				onclick="openLink('https://linkedin.com/in/ren-chen-898012277/')">🌐</button>
+
+			<!--
+			<button class="icon-btn" title="Resume"
+				onclick="openLink('https://drive.google.com/file/d/175VhCU-ewwSQiLeKnhUMh8Brf-I0jm0I/view')">📄</button>
+			-->
+
+			<button class="icon-btn" title="Resume" onclick="showComingSoon()">📄</button>
+		</div>
+	</div>
+
+	<script>
+		function openLink(url) {
+			window.open(url, '_blank');
+		}
+
+		function go(page) {
+			window.location.href = page;
+		}
+
+		function copyEmail() {
+			navigator.clipboard.writeText('chen.ren.tw@gmail.com');
+			alert('Email copied to clipboard');
+		}
+
+		function showComingSoon() {
+			alert('🚧 Resume is coming soon');
+
+		}
+	</script>
+</body>
+</html>

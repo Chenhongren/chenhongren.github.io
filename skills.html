@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Skills | Hong-Ren Chen</title>
+
+	<style>
+		body {
+			margin: 0;
+			background: #0a0a0a;
+			color: #eaeaea;
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont,
+				'Segoe UI', Roboto, sans-serif;
+			line-height: 1.7;
+		}
+
+		.container {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 60px 20px 120px;
+		}
+
+		.header {
+			text-align: center;
+			margin-bottom: 60px;
+		}
+
+		.name {
+			font-size: 3em;
+			font-weight: 800;
+			margin-bottom: 10px;
+			background: linear-gradient(90deg, #00d4ff, #9d50ff);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		.subtitle {
+			color: #9aa;
+			font-size: 1.2em;
+			letter-spacing: 0.04em;
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 30px;
+		}
+
+		.card {
+			background: rgba(20, 20, 20, 0.7);
+			border: 1px solid rgba(255, 255, 255, 0.05);
+			border-radius: 20px;
+			padding: 30px;
+			backdrop-filter: blur(10px);
+			transition: 0.3s ease;
+		}
+
+		.card:hover {
+			transform: translateY(-6px);
+			background: rgba(25, 25, 25, 0.85);
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+		}
+
+		.card-title {
+			font-size: 1.4em;
+			font-weight: 700;
+			margin-bottom: 20px;
+			color: #ffffff;
+			position: relative;
+			padding-left: 16px;
+		}
+
+		.card-title::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 4px;
+			height: 24px;
+			background: #ff006e;
+			border-radius: 2px;
+		}
+
+		.tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+		}
+
+		.tag {
+			padding: 8px 16px;
+			border-radius: 25px;
+			font-size: 0.9em;
+			font-weight: 500;
+			background: linear-gradient(45deg, #00d4ff, #0099cc);
+			color: #fff;
+			transition: 0.3s ease;
+			white-space: nowrap;
+		}
+
+		.tag:hover {
+			transform: scale(1.05);
+			background: linear-gradient(45deg, #ff006e, #cc0055);
+		}
+
+		.back {
+			position: fixed;
+			bottom: 30px;
+			right: 30px;
+			padding: 14px 26px;
+			border-radius: 30px;
+			border: none;
+			background: linear-gradient(45deg, #ff006e, #8338ec);
+			color: white;
+			font-size: 1em;
+			font-weight: 600;
+			cursor: pointer;
+			box-shadow: 0 8px 30px rgba(255, 0, 110, 0.3);
+			transition: 0.3s ease;
+		}
+
+		.back:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 12px 40px rgba(255, 0, 110, 0.4);
+		}
+
+		.social-bar {
+			position: fixed;
+			right: 28px;
+			top: 50%;
+			transform: translateY(-50%);
+			display: flex;
+			flex-direction: column;
+			gap: 18px;
+			z-index: 1000;
+		}
+
+		.social-bar a {
+			width: 46px;
+			height: 46px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+			background: rgba(20, 20, 20, 0.85);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			color: #ffffff;
+			font-size: 1.2em;
+			text-decoration: none;
+			transition: 0.3s ease;
+			backdrop-filter: blur(10px);
+		}
+
+		.social-bar a:hover {
+			transform: translateX(-6px);
+			background: linear-gradient(45deg, #00d4ff, #9d50ff);
+			box-shadow: 0 10px 30px rgba(0, 212, 255, 0.35);
+		}
+
+		.nav-buttons {
+			position: fixed;
+			bottom: 30px;
+			right: 30px; /* moved to right side */
+			display: flex;
+			gap: 14px;
+			z-index: 1000;
+		}
+
+		.nav-buttons button {
+			padding: 12px 24px;
+			border-radius: 26px;
+			border: none;
+			font-size: 0.95em;
+			font-weight: 600;
+			cursor: pointer;
+			color: #ffffff;
+			background: rgba(20, 20, 20, 0.85);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(10px);
+			transition: 0.3s ease;
+		}
+
+		.nav-buttons button:hover {
+			transform: translateY(-3px);
+			background: linear-gradient(45deg, #00d4ff, #9d50ff);
+			box-shadow: 0 10px 30px rgba(0, 212, 255, 0.35);
+		}
+
+		.nav-buttons .active {
+			background: linear-gradient(45deg, #ff006e, #8338ec);
+			box-shadow: 0 10px 30px rgba(255, 0, 110, 0.35);
+		}
+
+		/* Coming soon floating box */
+		.soon-box {
+			position: fixed;
+			bottom: 110px;
+			right: 50%;
+			transform: translateX(50%) translateY(10px);
+			background: rgba(20, 20, 20, 0.9);
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			border-radius: 16px;
+			padding: 12px 20px;
+			color: #ffffff;
+			font-size: 0.95em;
+			backdrop-filter: blur(10px);
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+			opacity: 0;
+			pointer-events: none;
+			transition: 0.3s ease;
+			z-index: 2000;
+		}
+
+		.soon-box.show {
+			opacity: 1;
+			transform: translateX(50%) translateY(0);
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="header">
+			<div class="name">Hong-Ren Chen</div>
+			<div class="subtitle">
+				Firmware Engineer · Embedded Systems · Open Source Project
+			</div>
+		</div>
+
+		<div class="grid">
+			<!-- Embedded / Firmware -->
+			<div class="card">
+				<div class="card-title">Embedded & Firmware</div>
+				<div class="tags">
+					<span class="tag">Zephyr OS</span>
+					<span class="tag">Chromebook EC</span>
+					<span class="tag">OpenBMC</span>
+					<span class="tag">OpenBIC</span>
+					<span class="tag">Linux Drivers</span>
+					<span class="tag">Device Tree</span>
+				</div>
+			</div>
+
+			<!-- Communication Protocols -->
+			<div class="card">
+				<div class="card-title">Protocols</div>
+				<div class="tags">
+					<span class="tag">I2C</span>
+					<span class="tag">I3C (SDR)</span>
+					<span class="tag">SPI</span>
+					<span class="tag">eSPI</span>
+					<span class="tag">USB</span>
+					<span class="tag">USB HID</span>
+					<span class="tag">UART</span>
+					<span class="tag">PECI</span>
+				</div>
+			</div>
+
+			<!-- Build & Tooling -->
+			<div class="card">
+				<div class="card-title">Build & Tooling</div>
+				<div class="tags">
+					<span class="tag">Yocto</span>
+					<span class="tag">BitBake</span>
+					<span class="tag">CMake</span>
+					<span class="tag">Meson</span>
+					<span class="tag">Git</span>
+					<span class="tag">IPMI</span>
+				</div>
+			</div>
+
+			<!-- Debugging -->
+			<div class="card">
+				<div class="card-title">Debugging</div>
+				<div class="tags">
+					<span class="tag">Logic Analyzer</span>
+					<span class="tag">Oscilloscope</span>
+					<span class="tag">JTAG</span>
+					<span class="tag">OpenOCD</span>
+					<span class="tag">GDB</span>
+				</div>
+			</div>
+
+			<!-- Programming -->
+			<div class="card">
+				<div class="card-title">Programming</div>
+				<div class="tags">
+					<span class="tag">C</span>
+					<span class="tag">C++</span>
+					<span class="tag">Python</span>
+					<span class="tag">Shell</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="social-bar">
+		<a href="mailto:chen.ren.tw@gmail.com" title="Email">✉️</a>
+		<a href="https://github.com/Chenhongren" target="_blank" title="GitHub">🐙</a>
+		<a href="https://www.linkedin.com/in/ren-chen-898012277/" target="_blank" title="LinkedIn">💼</a>
+		<!--
+		<a href="resume.pdf" target="_blank" title="Resume">📄</a>
+		-->
+		<a href="javascript:void(0)" title="Resume" onclick="showComingSoon()">📄</a>
+	</div>
+
+	<div class="nav-buttons">
+		<button class="active" onclick="window.location.href='aboutme.html'">
+			About Me
+		</button>
+		<button class="active" onclick="window.location.href='index.html'">
+			Home
+		</button>
+		<button class="active" onclick="window.location.href='projects.html'">
+			Projects
+		</button>
+	</div>
+
+	<div id="soonBox" class="soon-box">🚧 Resume is coming soon</div>
+
+	<script>
+		function showComingSoon() {
+			const box = document.getElementById('soonBox');
+			box.classList.add('show');
+
+			setTimeout(() => {
+				box.classList.remove('show');
+			}, 2000);
+		}
+	</script>
+</body>
+</html>
